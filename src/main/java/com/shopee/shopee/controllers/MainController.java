@@ -14,6 +14,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -55,7 +56,7 @@ public class MainController {
 	private CommentRepository commentRepo;
 
 	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
+	private PasswordEncoder passwordEncoder;
 
 	/* ==================== */
 
@@ -139,40 +140,7 @@ public class MainController {
 		return "redirect:/register";
 	}
 
-	/*
-	 * EXPLANATION OF REGISTER METHOD
-	 * 
-	 * This function is a method that handles a POST request to the
-	 * "/process-registration" URL. It is used to register a new user in the
-	 * application.
-	 * 
-	 * If the user input is not valid, return the user to the registration page.
-	 * 
-	 * If the user did not select a role, redirect them to the registration page and
-	 * set a status message.
-	 * 
-	 * If the user did not enter a confirm password, redirect them to the
-	 * registration page and set a status message.
-	 * 
-	 * If the password and confirm password do not match, redirect the user to the
-	 * registration page and set a status message.
-	 * 
-	 * Set the user's role based on their input.
-	 * 
-	 * Set the user's account to be enabled, set the default profile picture, and
-	 * encrypt the password.
-	 * 
-	 * Save the user to the database.
-	 * 
-	 * If there is a database error, redirect the user to the registration page and
-	 * set a status message.
-	 * 
-	 * If there is any other error, set a status message and print the stack trace.
-	 * 
-	 * Set a success status message and redirect the user to the registration page.
-	 * 
-	 */
-
+	
 
 	@GetMapping("/login")
 	public String loginPage(Model m) {
@@ -195,17 +163,9 @@ public class MainController {
 
 		}
 
-		m.addAttribute("title", "Login | StoreWala");
+		m.addAttribute("title", "Login | Shopee");
 		return "login";
 	}
-
-	/*
-	 * The above function is a method that handles requests to the /login URL. If
-	 * the user is logged in, the function redirects them to a different URL
-	 * depending on their role (e.g. /customer/home, /admin/home, or /seller/home).
-	 * If the user is not logged in, the function adds an attribute to the Model
-	 * object and returns a view that will likely render a login page for the user.
-	 */
 
 	@GetMapping("/search")
 	public String searchProducts(@RequestParam(value = "category", required = false) Integer categoryType,
@@ -214,16 +174,10 @@ public class MainController {
 		return "search_product";
 	}
 
-	/*
-	 *                         EXPLANATION OF SEARCH METHOD
-	 *                         
-	 *  the above function is a method that handles request to the /search URL.
-	 *  it displays all of the products related to the query and category.
-	 */
-
+	
 	@GetMapping("/unban-request")
 	public String unbanRequestView(Model m) {
-		m.addAttribute("title", "Unban Request | StoreWala");
+		m.addAttribute("title", "Unban Request | Shopee");
 		m.addAttribute("unbanRequest", new UnbanRequest());
 		return "unban";
 	}
@@ -263,25 +217,6 @@ public class MainController {
 	}
 	
 	
-	/*            EXPLANATION OF PROCESS UNBAN REQUEST METHOD
-	  This function is a controller method that handles a POST request to the "/processing-unban-request" URL.
-	  It is used to submit an unban request for a suspended user in the application.
-
-	  If the user input is not valid, return the user to the unban request page.
-
-	  Check if the user exists in the database. If they do not exist, set a status message
-	  and redirect the user to the unban request page.
-
-	  Check if the user is suspended. If they are not suspended, set a status message
-	  and redirect the user to the unban request page.
-
-	  Save the unban request to the database.
-
-	  If the unban request was saved successfully, set a status message to indicate success.
-
-	  Redirect the user to the unban request page.
-	*/
-
 	@GetMapping("/profile")
 	public String showProfile(Model m, Principal principal, HttpSession httpSession) {
 
@@ -292,7 +227,7 @@ public class MainController {
 
 		User user = this.userRepo.loadUserByUserName(principal.getName());
 
-		m.addAttribute("title", user.getName() + " | StoreWala");
+		m.addAttribute("title", user.getName() + " | Shopee");
 		m.addAttribute("user", user);
 		return "profile";
 	}
@@ -369,29 +304,6 @@ public class MainController {
 		httpSession.setAttribute("status", "went-wrong");
 		return "redirect:/showProduct?product_id=" + productId;
 	}
-
-	/*
-	 * Explanation of process comment method
-	 * 
-	 * This above method is a method that handles requests to process a comment on a
-	 * product. It has several parameters, including the current HTTP session, the
-	 * comment text, the ID of the user who submitted the comment, and the ID of the
-	 * product the comment is related to.
-	 * 
-	 * The method first retrieves the user object from the database using the
-	 * provided user ID, and then creates a new Comment object with the provided
-	 * comment text, product ID, user, and current date. The method then saves the
-	 * comment to the database and sets a flag to indicate that the comment was
-	 * saved successfully.
-	 * 
-	 * If the flag is set, the method sets an attribute in the HTTP session,
-	 * redirects the user to the page for the product with the provided product ID,
-	 * and appends a query parameter to the URL indicating that the comment was
-	 * submitted successfully. Otherwise, the method sets an attribute in the HTTP
-	 * session and redirects the user to the same page, but without the query
-	 * parameter.
-	 * 
-	 */
 
 	@GetMapping("/MyOrders")
 	public String orderStatus() {
