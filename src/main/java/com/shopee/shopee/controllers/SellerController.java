@@ -62,7 +62,7 @@ public class SellerController {
 
 		List<Category> categories = this.categoryRepo.getCategories();
 
-		m.addAttribute("title", "Seller Panel | StoreWala");
+		m.addAttribute("title", "Seller Panel | Shopee");
 		m.addAttribute("product", new Product());
 		m.addAttribute("categories", categories);
 		m.addAttribute("user", user);

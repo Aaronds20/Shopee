@@ -20,12 +20,12 @@ public class ErrorsController implements ErrorController {
 			int statusCode = Integer.parseInt(status.toString());
 
 			if (statusCode == 404) {
-				m.addAttribute("title", "404 Not Found | StoreWala");
+				m.addAttribute("title", "404 Not Found | Shopee");
 				return "errors/404";
 			}
 
 		}
-		m.addAttribute("title", "Something Went Wrong | StoreWala");
+		m.addAttribute("title", "Something Went Wrong | Shopee");
 		return "errors/500";
 
 	}

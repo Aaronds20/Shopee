@@ -46,7 +46,7 @@ public class AdminController {
 		List<Category> categories = this.categoryRepo.getCategories();
 		List<Product> products = this.productRepo.getProducts();
 
-		m.addAttribute("title", "Admin | StoreWala");
+		m.addAttribute("title", "Admin | Shopee");
 		m.addAttribute("user", user);
 		m.addAttribute("users", users);
 		m.addAttribute("products", products);

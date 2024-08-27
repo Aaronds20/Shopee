@@ -72,7 +72,7 @@ public class MainController {
 		List<Product> products = this.productRepo.getProducts();
 		List<Category> categories = this.categoryRepo.getCategories();
 
-		m.addAttribute("title", "StoreWala | Start Shopping Now!");
+		m.addAttribute("title", "Shopee | Start Shopping Now!");
 		m.addAttribute("categories", categories);
 		m.addAttribute("products", products);
 		return "index.html";
@@ -82,7 +82,7 @@ public class MainController {
 	@GetMapping("/register")
 	public String registerPage(Model m) {
 
-		m.addAttribute("title", "Register | StoreWala");
+		m.addAttribute("title", "Register | Shopee");
 		m.addAttribute("user", new User());
 		return "register";
 	}
@@ -252,7 +252,7 @@ public class MainController {
 
 		m.addAttribute("user", user);
 		m.addAttribute("pincode", String.format("%06d", pinCode));
-		m.addAttribute("title", "Checkout | StoreWala");
+		m.addAttribute("title", "Checkout | Shopee");
 		return "checkout";
 	}
 	
