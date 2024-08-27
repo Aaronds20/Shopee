@@ -1,4 +1,4 @@
-Shopee is a clone e-commerce website that allows users to browse and purchase products online. It is built using the following technologies:
+Shopee is an e-commerce website project that allows users to browse and purchase products online. It is built using the following technologies:
 
 -- Spring Boot<br />
 -- Thymeleaf<br />
